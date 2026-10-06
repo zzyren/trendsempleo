@@ -134,3 +134,5 @@ h1{font-size:clamp(42px,7vw,80px);letter-spacing:-.01em}
 .chips li:nth-child(-n+3){background:var(--navy);border-color:var(--navy);color:#fff}
 .chips li:nth-child(-n+3)::before{color:#fff;opacity:.8}
 .callout{margin-top:32px}
+.act h2,h1{text-wrap:balance}
+.chips{margin-top:16px}
