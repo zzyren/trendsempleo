@@ -8,9 +8,11 @@
   <meta name="color-scheme" content="light dark">
   <script>
     (function () {
+      var r = document.documentElement;
+      r.className += ' js';
       try {
         var t = localStorage.getItem('tema');
-        if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+        if (t === 'dark' || t === 'light') r.setAttribute('data-theme', t);
       } catch (e) {}
     })();
   </script>
@@ -21,15 +23,16 @@
 </head>
 <body>
   <a class="skip" href="#contenido">Saltar al contenido</a>
+  <div class="progress" id="progress" aria-hidden="true"></div>
 
-  <header class="topbar">
+  <header class="topbar" id="topbar">
     <div class="wrap topbar__in">
       <a class="brand" href="#inicio">Tendencias<span>.empleo</span></a>
       <nav id="nav" class="nav" aria-label="Principal">
-        <a href="#actividad-1">Más demandados</a>
-        <a href="#actividad-2">Difícil cobertura</a>
-        <a href="#actividad-3">Observatorio</a>
-        <a href="#fuentes">Fuentes</a>
+        <a href="#demandados">Más demandados</a>
+        <a href="#cobertura">Difícil cobertura</a>
+        <a href="#observatorio">Observatorio</a>
+        <a class="nav__cta btn" href="#fuentes">Fuentes</a>
       </nav>
       <div class="tools">
         <button class="theme-btn" id="themeBtn" type="button" aria-label="Cambiar a modo oscuro" title="Cambiar tema">
@@ -44,135 +47,156 @@
   </header>
 
   <main id="contenido">
-    <section class="hero wrap" id="inicio">
-      <div class="hero__text">
-        <p class="eyebrow">Sector informática · España</p>
-        <h1>Tendencias de nuevos empleos</h1>
-        <p class="lead">Qué puestos informáticos se demandan más, cuáles cuesta cubrir y quién analiza el mercado de trabajo. Datos de fuentes oficiales del Servicio Público de Empleo Estatal (SEPE).</p>
+    <!-- HERO -->
+    <section class="wrap" id="inicio">
+      <div class="hero">
+        <div class="hero__text">
+          <p class="eyebrow rise" style="--d:.15s">Sector informática · España</p>
+          <h1 class="rise" style="--d:.28s">Tendencias de nuevos empleos en informática</h1>
+          <p class="lead rise" style="--d:.42s">Qué perfiles tecnológicos se demandan más, cuáles cuesta cubrir y quién analiza el mercado de trabajo. Todo con datos del Servicio Público de Empleo Estatal (SEPE).</p>
+          <div class="hero__btns rise" style="--d:.56s">
+            <a class="btn btn--light" href="#demandados">Ver los puestos más demandados</a>
+            <a class="btn btn--ghost" href="#observatorio">¿Qué es el Observatorio?</a>
+          </div>
+        </div>
+        <aside class="top5 rise" style="--d:.45s" aria-label="Resumen de puestos más demandados">
+          <h2>Los 5 más demandados</h2>
+          <ol>
+            <li><span>1</span>Desarrolladores de software</li>
+            <li><span>2</span>Desarrolladores web y frontend</li>
+            <li><span>3</span>Administradores de sistemas</li>
+            <li><span>4</span>Ingenieros y analistas de datos</li>
+            <li><span>5</span>Expertos en ciberseguridad</li>
+          </ol>
+          <p>Perspectivas de empleo según expertos consultados por el SEPE.</p>
+        </aside>
       </div>
-      <ul class="hero__cards">
-        <li><a href="#actividad-1"><b>Los más demandados</b><span>5 puestos TIC con mejores perspectivas</span></a></li>
-        <li><a href="#actividad-2"><b>Los más difíciles de cubrir</b><span>5 perfiles TIC con vacantes sin cubrir</span></a></li>
-        <li><a href="#actividad-3"><b>Observatorio Ocupacional</b><span>Qué es, qué hace y su barómetro de empleo</span></a></li>
-      </ul>
     </section>
 
-    <!-- ACTIVIDAD 1 -->
-    <section class="wrap act" id="actividad-1" aria-labelledby="t1">
-      <h2 id="t1">Los 5 puestos de informática más demandados en España</h2>
-      <p class="intro">Ocupaciones TIC con mejores perspectivas de empleo según el Observatorio de las Ocupaciones del SEPE, a partir de consultas a personas expertas (<em>Tendencias del mercado de trabajo en España 2025</em>).</p>
+    <!-- CIFRAS CLAVE -->
+    <section class="wrap" aria-label="Cifras clave">
+      <div class="cifras">
+        <div class="cifra reveal"><strong data-count="16">16</strong><span>especialidades TIC con vacantes sin cubrir, ordenadas por el SEPE.</span></div>
+        <div class="cifra reveal" style="--d:.1s"><strong data-count="77" data-suffix=" %">77 %</strong><span>de expertos dice que las condiciones laborales limitan cubrir vacantes.</span></div>
+        <div class="cifra reveal" style="--d:.2s"><strong data-count="72" data-suffix=" %">72 %</strong><span>cree que la formación profesional se adapta bastante o totalmente al mercado.</span></div>
+        <div class="cifra reveal" style="--d:.3s"><strong data-count="58" data-suffix=" %">58 %</strong><span>espera que la economía verde genere más oportunidades de empleo.</span></div>
+      </div>
+      <p class="note">Barómetro de Empleo y Formación del SEPE, junio de 2026, y listado de especialidades TIC de «Tendencias del mercado de trabajo en España 2025».</p>
+    </section>
 
-      <ol class="rank" id="rank1">
-        <li><span class="rank__n">1</span><div><h3>Desarrolladores de software</h3><p>Es la especialidad con más vacantes en el sector TIC, según las organizaciones empresariales.</p></div></li>
-        <li><span class="rank__n">2</span><div><h3>Desarrolladores web y frontend</h3><p>Diseño e implementación de aplicaciones web; también con buenas opciones de autoempleo.</p></div></li>
-        <li><span class="rank__n">3</span><div><h3>Administradores de sistemas</h3><p>Sistemas y redes: la tercera especialidad con más vacantes sin cubrir.</p></div></li>
-        <li><span class="rank__n">4</span><div><h3>Ingenieros y analistas de datos</h3><p>Big data y business intelligence, impulsados por la inteligencia artificial.</p></div></li>
-        <li><span class="rank__n">5</span><div><h3>Expertos en ciberseguridad</h3><p>La IA y la digitalización exigen mejorar de forma continua la seguridad.</p></div></li>
-      </ol>
-
-      <aside class="callout">
+    <!-- MÁS DEMANDADOS -->
+    <section class="wrap sec" id="demandados" aria-labelledby="t1">
+      <div class="sec__head reveal">
+        <p class="kicker">Mejores perspectivas de empleo</p>
+        <h2 id="t1">Los 5 puestos de informática más demandados</h2>
+        <p>Ocupaciones TIC con mejores perspectivas según el Observatorio de las Ocupaciones del SEPE, a partir de consultas a personas expertas.</p>
+      </div>
+      <div class="cards5">
+        <article class="card reveal"><span class="num">1</span><h3>Desarrolladores de software</h3><p>La especialidad con más vacantes en el sector TIC, según las organizaciones empresariales.</p></article>
+        <article class="card reveal" style="--d:.08s"><span class="num">2</span><h3>Desarrolladores web y frontend</h3><p>Diseño e implementación de aplicaciones web; también con buenas opciones de autoempleo.</p></article>
+        <article class="card reveal" style="--d:.16s"><span class="num">3</span><h3>Administradores de sistemas</h3><p>Sistemas y redes: la tercera especialidad con más vacantes sin cubrir.</p></article>
+        <article class="card reveal" style="--d:.24s"><span class="num">4</span><h3>Ingenieros y analistas de datos</h3><p>Big data y business intelligence, impulsados por la inteligencia artificial.</p></article>
+        <article class="card reveal" style="--d:.32s"><span class="num">5</span><h3>Expertos en ciberseguridad</h3><p>La IA y la digitalización exigen mejorar de forma continua la seguridad.</p></article>
+      </div>
+      <div class="callout reveal">
         <h3>Contratación indefinida</h3>
-        <p>Programadores informáticos; analistas, programadores y diseñadores web y multimedia; técnicos en operaciones de sistemas informáticos y analistas de sistemas son las ocupaciones con <strong>mejores perspectivas de empleo indefinido</strong>. Los programadores informáticos figuran además entre las ocupaciones más contratadas en 2024.</p>
-      </aside>
-      <p class="note">Las perspectivas proceden de la opinión de expertos consultados por el SEPE; no son una clasificación por número de contratos.</p>
+        <p>Programadores informáticos; analistas, programadores y diseñadores web y multimedia; técnicos en operaciones de sistemas informáticos y analistas de sistemas tienen las <strong>mejores perspectivas de empleo indefinido</strong>. Los programadores figuran además entre las ocupaciones más contratadas en 2024.</p>
+      </div>
     </section>
 
-    <!-- ACTIVIDAD 2 -->
-    <section class="wrap act" id="actividad-2" aria-labelledby="t2">
-      <h2 id="t2">Los 5 puestos de informática más difíciles de cubrir</h2>
-      <p class="intro">El SEPE señala que las ocupaciones del sector TIC concentran el <strong>mayor número de vacantes sin cubrir</strong> en todo el territorio: faltan demandantes con la formación y las competencias técnicas que pide el mercado y, según los sindicatos, se exportan perfiles cualificados que rechazan las condiciones laborales.</p>
-
-      <div class="tabs" role="tablist" aria-label="Ocupaciones TIC de difícil cobertura">
-        <button role="tab" aria-selected="true" aria-controls="p0" id="tb0">Desarrollo de software</button>
-        <button role="tab" aria-selected="false" aria-controls="p1" id="tb1" tabindex="-1">Programación</button>
-        <button role="tab" aria-selected="false" aria-controls="p2" id="tb2" tabindex="-1">Ciberseguridad</button>
-        <button role="tab" aria-selected="false" aria-controls="p3" id="tb3" tabindex="-1">Redes</button>
-        <button role="tab" aria-selected="false" aria-controls="p4" id="tb4" tabindex="-1">Open RAN</button>
+    <!-- DIFÍCIL COBERTURA -->
+    <section class="wrap sec" id="cobertura" aria-labelledby="t2">
+      <div class="sec__head reveal">
+        <p class="kicker">Vacantes sin cubrir</p>
+        <h2 id="t2">Los 5 puestos de informática más difíciles de cubrir</h2>
+        <p>Las ocupaciones TIC concentran el mayor número de vacantes sin cubrir en todo el territorio: faltan demandantes con la formación y las competencias técnicas que pide el mercado y, según los sindicatos, se exportan perfiles cualificados que rechazan las condiciones laborales.</p>
       </div>
-      <div class="panel" role="tabpanel" id="p0" aria-labelledby="tb0">
-        <h3>1. Desarrolladores de software</h3>
-        <p>Desarrollo de software es la especialidad con más vacantes sin cubrir en el sector TIC.</p>
+      <div class="cob">
+        <div class="cob__list">
+          <article class="row reveal"><span class="num num--s">1</span><div><h3>Desarrolladores de software</h3><p>Es la especialidad con más vacantes sin cubrir en el sector TIC.</p></div></article>
+          <article class="row reveal" style="--d:.08s"><span class="num num--s">2</span><div><h3>Programadores</h3><p>Entre las ocupaciones con mayor desajuste entre oferta y demanda y entre las más contratadas en 2024.</p></div></article>
+          <article class="row reveal" style="--d:.16s"><span class="num num--s">3</span><div><h3>Ingenieros de sistemas expertos en ciberseguridad</h3><p>Perfil de difícil cobertura según los expertos del SEPE, con demanda creciente por la inteligencia artificial.</p></div></article>
+          <article class="row reveal" style="--d:.24s"><span class="num num--s">4</span><div><h3>Administradores de redes</h3><p>Faltan candidatos con la formación técnica que requieren las vacantes.</p></div></article>
+          <article class="row reveal" style="--d:.32s"><span class="num num--s">5</span><div><h3>Expertos en arquitectura Open RAN</h3><p>Perfil de telecomunicaciones ligado al despliegue de redes móviles abiertas.</p></div></article>
+        </div>
+        <div class="esp reveal">
+          <h3>Especialidades TIC con más vacantes sin cubrir</h3>
+          <p class="note">De mayor a menor, según las organizaciones empresariales citadas por el SEPE.</p>
+          <ol class="chips">
+            <li>Desarrollo de software</li><li>Inteligencia artificial</li><li>Sistemas</li><li>Robótica</li><li>Hardware</li><li>Cloud</li><li>ERP</li><li>Helpdesk</li><li>CPD</li><li>Telecomunicaciones</li><li>CRM</li><li>Realidad virtual y aumentada</li><li>Ciberseguridad</li><li>Big data</li><li>BI</li><li>Gestión de proyectos</li>
+          </ol>
+        </div>
       </div>
-      <div class="panel" role="tabpanel" id="p1" aria-labelledby="tb1" hidden>
-        <h3>2. Programadores</h3>
-        <p>Programadores informáticos: figuran entre las ocupaciones con mayor desajuste entre oferta y demanda y entre las más contratadas en 2024.</p>
+      <div class="callout reveal">
+        <h3>¿Y el catálogo oficial de difícil cobertura?</h3>
+        <p>El catálogo del 3.er trimestre de 2026 (SEPE) recoge deportistas, oficios de la construcción y la electricidad, y marina mercante: <strong>no incluye ocupaciones informáticas</strong>. Los perfiles TIC de esta sección proceden del análisis del Observatorio de las Ocupaciones.</p>
       </div>
-      <div class="panel" role="tabpanel" id="p2" aria-labelledby="tb2" hidden>
-        <h3>3. Ingenieros de sistemas expertos en ciberseguridad</h3>
-        <p>Perfil de difícil cobertura según los expertos del SEPE, con demanda creciente por el avance de la inteligencia artificial.</p>
-      </div>
-      <div class="panel" role="tabpanel" id="p3" aria-labelledby="tb3" hidden>
-        <h3>4. Administradores de redes</h3>
-        <p>Técnicos y administradores de redes e infraestructuras: vacantes difíciles de cubrir por falta de candidatos con la formación técnica requerida.</p>
-      </div>
-      <div class="panel" role="tabpanel" id="p4" aria-labelledby="tb4" hidden>
-        <h3>5. Expertos en arquitectura Open RAN</h3>
-        <p>Perfil de telecomunicaciones vinculado al despliegue de redes móviles abiertas, también señalado como de difícil cobertura.</p>
-      </div>
-
-      <h3 class="sub">Especialidades TIC con más vacantes sin cubrir</h3>
-      <p class="note" style="margin-top:-8px">Orden de mayor a menor, según las organizaciones empresariales citadas por el SEPE.</p>
-      <ol class="chips">
-        <li>Desarrollo de software</li><li>Inteligencia artificial</li><li>Sistemas</li><li>Robótica</li><li>Hardware</li><li>Cloud</li><li>ERP</li><li>Helpdesk</li><li>CPD</li><li>Telecomunicaciones</li><li>CRM</li><li>Realidad virtual y aumentada</li><li>Ciberseguridad</li><li>Big data</li><li>BI</li><li>Gestión de proyectos</li>
-      </ol>
-
-      <aside class="callout">
-        <h3>¿Y el catálogo oficial?</h3>
-        <p>El Catálogo de Ocupaciones de Difícil Cobertura del 3.er trimestre de 2026 (SEPE) recoge deportistas, oficios de la construcción y la electricidad, y marina mercante: <strong>no incluye ocupaciones informáticas</strong>. Los perfiles TIC de arriba proceden del análisis del Observatorio de las Ocupaciones.</p>
-      </aside>
     </section>
 
-    <!-- ACTIVIDAD 3 -->
-    <section class="wrap act" id="actividad-3" aria-labelledby="t3">
-      <h2 id="t3">Observatorio Ocupacional</h2>
-
-      <div class="acc">
-        <details open>
-          <summary>¿Qué es?</summary>
-          <p>El <strong>Observatorio de las Ocupaciones</strong> es la unidad técnica del SEPE. Está formada por una red de profesionales repartida por todo el territorio que analiza la situación y las tendencias del mercado de trabajo, y los retos y requerimientos que plantea.</p>
-        </details>
-        <details>
-          <summary>¿Qué responsabilidades tiene?</summary>
+    <!-- OBSERVATORIO -->
+    <section class="wrap sec" id="observatorio" aria-labelledby="t3">
+      <div class="sec__head reveal">
+        <p class="kicker">Quién analiza el mercado</p>
+        <h2 id="t3">Observatorio Ocupacional</h2>
+      </div>
+      <div class="obs">
+        <article class="obs__c obs__c--hi reveal">
+          <h3>¿Qué es?</h3>
+          <p>El <strong>Observatorio de las Ocupaciones</strong> es la unidad técnica del SEPE: una red de profesionales repartida por todo el territorio que analiza la situación y las tendencias del mercado de trabajo, y los retos y requerimientos que plantea.</p>
+        </article>
+        <article class="obs__c reveal" style="--d:.1s">
+          <h3>¿Qué responsabilidades tiene?</h3>
           <ul>
-            <li>Elaborar informes y análisis del mercado de trabajo con indicadores actualizados, en el ámbito estatal, autonómico y provincial.</li>
-            <li>Diagnosticar las necesidades de formación y recualificación para anticiparse a los cambios en la demanda de mano de obra cualificada.</li>
+            <li>Elaborar informes de mercado de trabajo con indicadores actualizados, a nivel estatal, autonómico y provincial.</li>
+            <li>Diagnosticar necesidades de formación y recualificación.</li>
             <li>Contribuir al desarrollo profesional de las personas trabajadoras y a la competitividad de las empresas.</li>
-            <li>Elaborar el Catálogo de Ocupaciones de Difícil Cobertura, junto con los servicios autonómicos de empleo.</li>
+            <li>Elaborar el Catálogo de Ocupaciones de Difícil Cobertura.</li>
           </ul>
-        </details>
-        <details>
-          <summary>¿Qué es el Barómetro de Empleo y Formación?</summary>
-          <p>Es un instrumento del Observatorio que hace un seguimiento periódico de las percepciones de un panel de personas expertas del mercado de trabajo sobre empleo y formación. Complementa las estadísticas con valoraciones cualitativas y ofrece una previsión semestral.</p>
-        </details>
-      </div>
-
-      <h3 class="sub">Barómetro de junio de 2026: resultados clave</h3>
-      <div class="bars" id="bars">
-        <div class="bar" data-v="41"><label>Situación actual del empleo: «buena»</label><div class="track"><i></i></div><b>41 %</b></div>
-        <div class="bar" data-v="38"><label>Situación actual: «estable»</label><div class="track"><i></i></div><b>38 %</b></div>
-        <div class="bar" data-v="15"><label>Situación actual: negativa</label><div class="track"><i></i></div><b>15 %</b></div>
-        <div class="bar" data-v="50"><label>Esperan mejora en servicios</label><div class="track"><i></i></div><b>50 %</b></div>
-        <div class="bar" data-v="42"><label>Esperan mejora en construcción</label><div class="track"><i></i></div><b>42 %</b></div>
-        <div class="bar" data-v="72"><label>La FP se adapta bastante o totalmente al mercado</label><div class="track"><i></i></div><b>72 %</b></div>
-        <div class="bar" data-v="77"><label>Las condiciones laborales limitan cubrir vacantes</label><div class="track"><i></i></div><b>77 %</b></div>
-        <div class="bar" data-v="58"><label>La economía verde generará más oportunidades</label><div class="track"><i></i></div><b>58 %</b></div>
-        <div class="bar" data-v="30"><label>La digitalización creará más empleo del que destruya</label><div class="track"><i></i></div><b>30 %</b></div>
+        </article>
+        <article class="obs__c reveal" style="--d:.2s">
+          <h3>¿Qué es el Barómetro de Empleo y Formación?</h3>
+          <p>Instrumento del Observatorio que hace un seguimiento periódico de las percepciones de un panel de personas expertas sobre empleo y formación. Complementa las estadísticas con valoraciones cualitativas y ofrece una previsión semestral.</p>
+        </article>
       </div>
     </section>
 
-    <section class="wrap sources" id="fuentes" aria-labelledby="t4">
-      <h2 id="t4">Fuentes oficiales</h2>
-      <ul>
-        <li><a href="https://www.sepe.es/HomeSepe/que-es-observatorio.html" target="_blank" rel="noopener">SEPE · Observatorio de las Ocupaciones</a></li>
-        <li><a href="https://sepe.es/SiteSepe/contenidos/observatorio/tendencias/2025-Tendencias-del-mercado-de-trabajo-en-Espa-a-NIPO.pdf" target="_blank" rel="noopener">SEPE · Tendencias del mercado de trabajo en España 2025 (PDF)</a></li>
-        <li><a href="https://www.sepe.es/HomeSepe/que-es-observatorio/publicaciones-observatorio/detalle-publicacion-observatorio~_publicaciones_publicaciones-observatorio_RESUMENES-EJECUTIVOS-2026_imt-2026-estatal~.html" target="_blank" rel="noopener">SEPE · Informe del Mercado de Trabajo Estatal 2026</a></li>
-        <li><a href="https://www.sepe.es/noticia/SEPE/2026/Junio/observatorio-barometro-empleo-formacion-junio-2026" target="_blank" rel="noopener">SEPE · Barómetro de Empleo y Formación, junio 2026</a></li>
-        <li><a href="https://www.laboral-social.com/catalogo-ocupaciones-dificil-cobertura-tercer-trimestre-2026" target="_blank" rel="noopener">Catálogo de Ocupaciones de Difícil Cobertura, 3.er trimestre 2026</a></li>
+    <!-- BARÓMETRO -->
+    <section class="wrap" id="barometro" aria-labelledby="t4">
+      <div class="baro reveal">
+        <h2 id="t4">Barómetro de junio de 2026: resultados clave</h2>
+        <p class="baro__sub">Porcentaje de personas expertas del panel.</p>
+        <div class="bars" id="bars">
+          <div class="bar" data-v="41"><div class="bar__t"><span>Situación actual del empleo: «buena»</span><b>41 %</b></div><div class="track"><i></i></div></div>
+          <div class="bar" data-v="38"><div class="bar__t"><span>Situación actual: «estable»</span><b>38 %</b></div><div class="track"><i></i></div></div>
+          <div class="bar" data-v="15"><div class="bar__t"><span>Situación actual: negativa</span><b>15 %</b></div><div class="track"><i></i></div></div>
+          <div class="bar" data-v="50"><div class="bar__t"><span>Esperan mejora en servicios</span><b>50 %</b></div><div class="track"><i></i></div></div>
+          <div class="bar" data-v="42"><div class="bar__t"><span>Esperan mejora en construcción</span><b>42 %</b></div><div class="track"><i></i></div></div>
+          <div class="bar" data-v="72"><div class="bar__t"><span>La FP se adapta bastante o totalmente al mercado</span><b>72 %</b></div><div class="track"><i></i></div></div>
+          <div class="bar" data-v="77"><div class="bar__t"><span>Las condiciones laborales limitan cubrir vacantes</span><b>77 %</b></div><div class="track"><i></i></div></div>
+          <div class="bar" data-v="58"><div class="bar__t"><span>La economía verde generará más oportunidades</span><b>58 %</b></div><div class="track"><i></i></div></div>
+          <div class="bar" data-v="30"><div class="bar__t"><span>La digitalización creará más empleo del que destruya</span><b>30 %</b></div><div class="track"><i></i></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FUENTES -->
+    <section class="wrap sec" id="fuentes" aria-labelledby="t5">
+      <h2 id="t5" class="reveal">Fuentes oficiales</h2>
+      <ul class="src">
+        <li class="reveal"><a href="https://www.sepe.es/HomeSepe/que-es-observatorio.html" target="_blank" rel="noopener"><span>SEPE · Observatorio de las Ocupaciones</span><i aria-hidden="true">↗</i></a></li>
+        <li class="reveal" style="--d:.06s"><a href="https://sepe.es/SiteSepe/contenidos/observatorio/tendencias/2025-Tendencias-del-mercado-de-trabajo-en-Espa-a-NIPO.pdf" target="_blank" rel="noopener"><span>SEPE · Tendencias del mercado de trabajo en España 2025</span><i aria-hidden="true">↗</i></a></li>
+        <li class="reveal" style="--d:.12s"><a href="https://www.sepe.es/HomeSepe/que-es-observatorio/publicaciones-observatorio/detalle-publicacion-observatorio~_publicaciones_publicaciones-observatorio_RESUMENES-EJECUTIVOS-2026_imt-2026-estatal~.html" target="_blank" rel="noopener"><span>SEPE · Informe del Mercado de Trabajo Estatal 2026</span><i aria-hidden="true">↗</i></a></li>
+        <li class="reveal" style="--d:.18s"><a href="https://www.sepe.es/noticia/SEPE/2026/Junio/observatorio-barometro-empleo-formacion-junio-2026" target="_blank" rel="noopener"><span>SEPE · Barómetro de Empleo y Formación, junio 2026</span><i aria-hidden="true">↗</i></a></li>
+        <li class="reveal" style="--d:.24s"><a href="https://www.laboral-social.com/catalogo-ocupaciones-dificil-cobertura-tercer-trimestre-2026" target="_blank" rel="noopener"><span>Catálogo de Ocupaciones de Difícil Cobertura, 3.er trimestre 2026</span><i aria-hidden="true">↗</i></a></li>
       </ul>
     </section>
   </main>
 
   <footer class="foot"><div class="wrap">Datos consultados en octubre de 2026. Contrasta siempre con la publicación oficial más reciente.</div></footer>
+
+  <button class="totop" id="toTop" type="button" aria-label="Volver arriba" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
 
   <script src="script.js"></script>
 </body>
