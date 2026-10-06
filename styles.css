@@ -126,3 +126,11 @@ h1{font-size:clamp(42px,7vw,80px);letter-spacing:-.01em}
   html{scroll-behavior:auto}
   *{transition:none!important}
 }
+
+/* especialidades TIC */
+.chips{list-style:none;margin:0 0 8px;padding:0;display:flex;flex-wrap:wrap;gap:8px;counter-reset:c}
+.chips li{counter-increment:c;display:inline-flex;gap:8px;align-items:center;padding:8px 16px;border-radius:999px;background:var(--lav-2);border:1.5px solid #D3CEF7;font-size:16px;font-weight:500}
+.chips li::before{content:counter(c);font-size:13px;font-weight:700;color:var(--coral)}
+.chips li:nth-child(-n+3){background:var(--navy);border-color:var(--navy);color:#fff}
+.chips li:nth-child(-n+3)::before{color:#fff;opacity:.8}
+.callout{margin-top:32px}
