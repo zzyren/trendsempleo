@@ -1,6 +1,26 @@
 (function () {
   'use strict';
 
+  // Modo claro / oscuro (recuerda la elección; sin elección sigue al sistema)
+  var root = document.documentElement;
+  var themeBtn = document.getElementById('themeBtn');
+  var mq = window.matchMedia('(prefers-color-scheme: dark)');
+  function isDark() {
+    var t = root.getAttribute('data-theme');
+    return t ? t === 'dark' : mq.matches;
+  }
+  function syncThemeBtn() {
+    themeBtn.setAttribute('aria-label', isDark() ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
+  }
+  themeBtn.addEventListener('click', function () {
+    var next = isDark() ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('tema', next); } catch (e) {}
+    syncThemeBtn();
+  });
+  if (mq.addEventListener) mq.addEventListener('change', syncThemeBtn);
+  syncThemeBtn();
+
   // Menú móvil
   var btn = document.getElementById('menuBtn');
   var nav = document.getElementById('nav');
